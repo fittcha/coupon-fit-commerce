@@ -1,1 +1,5 @@
 rootProject.name = 'coupon-fit'
+
+include 'cf-app'
+include 'cf-common'
+include 'cf-product'

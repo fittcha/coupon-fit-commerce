@@ -1,0 +1,18 @@
+// 상품 모듈 - Hexagonal 아키텍처 적용
+// 실행 가능한 앱이 아니라서 bootJar 비활성화
+
+bootJar { enabled = false }
+jar { enabled = true }
+
+dependencies {
+    // 공통 모듈 의존
+    implementation project(':cf-common')
+
+    // Spring
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // DB
+    runtimeOnly 'com.mysql:mysql-connector-j'
+}

@@ -4,40 +4,47 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.fittcha'
-version = '0.0.1-SNAPSHOT'
-description = 'E-commerce platform with large-scale coupon optimization'
+// 모든 프로젝트 공통 설정
+allprojects {
+	group = 'com.fittcha'
+	version = '0.0.1-SNAPSHOT'
+	description = 'E-commerce platform with large-scale coupon optimization'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
+	repositories {
+		mavenCentral()
 	}
 }
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
+// 하위 모듈 공통 설정
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	java {
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(25)
+		}
 	}
-}
 
-repositories {
-	mavenCentral()
-}
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+	dependencies {
+		// Lombok
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
 
-tasks.named('test') {
-	useJUnitPlatform()
+		// 테스트
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.springframework.security:spring-security-test'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
 }

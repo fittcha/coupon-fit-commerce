@@ -1,0 +1,10 @@
+// 공통 모듈 - 다른 모듈에서 공유하는 코드
+// 실행 가능한 앱이 아니라서 bootJar 비활성화
+
+bootJar { enabled = false }
+jar { enabled = true }
+
+dependencies {
+    // 공통으로 쓸 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
