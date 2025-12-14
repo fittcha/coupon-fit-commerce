@@ -147,8 +147,11 @@ After:  2개에 6,000원 할인 (안분 계산)
 
 ## 📄 문서
 
-- [정책 문서](./docs/POLICY.md) *(예정)*
-- [ERD](./docs/ERD.md) *(예정)*
+- [데이터베이스 설계서](./docs/DATABASE_DESIGN.md)
 - [API 명세](./docs/API.md) *(예정)*
+
+### ERD
+
+![ERD](./docs/erd.png)
 
 
