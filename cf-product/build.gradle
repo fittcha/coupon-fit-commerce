@@ -15,4 +15,7 @@ dependencies {
 
     // DB
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // 테스트용 H2
+    testRuntimeOnly 'com.h2database:h2'
 }
