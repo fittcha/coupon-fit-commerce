@@ -48,3 +48,7 @@ subprojects {
 		useJUnitPlatform()
 	}
 }
+
+// 루트 프로젝트는 bootJar 비활성화
+bootJar { enabled = false }
+jar { enabled = false }
