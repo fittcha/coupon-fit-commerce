@@ -20,12 +20,14 @@ public class ProductMapper {
 
     // JPA Entity -> Domain
     public Product toDomain(ProductJpaEntity entity) {
-        return Product.create(
+        return Product.of(
+                entity.getId(),
                 entity.getBrandId(),
                 entity.getCategoryId(),
                 entity.getName(),
                 entity.getDescription(),
-                entity.getPrice()
+                entity.getPrice(),
+                entity.getStatus()
         );
     }
 }

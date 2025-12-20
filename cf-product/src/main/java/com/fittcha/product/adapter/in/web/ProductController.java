@@ -1,14 +1,12 @@
 package com.fittcha.product.adapter.in.web;
 
+import com.fittcha.product.application.port.in.GetProductUseCase;
 import com.fittcha.product.application.port.in.RegisterProductUseCase;
 import com.fittcha.product.domain.Product;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -18,11 +16,18 @@ import java.net.URI;
 public class ProductController {
 
     private final RegisterProductUseCase registerProductUseCase;
+    private final GetProductUseCase getProductUseCase;
 
     @PostMapping
     public ResponseEntity<Product> register(@Valid @RequestBody RegisterProductRequest request) {
         Product product = registerProductUseCase.register(request.toCommand());
 //        return ResponseEntity.created(URI.create("/api/products/" + product.getId()));
+        return ResponseEntity.ok(product);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getById(@PathVariable Long id) {
+        Product product = getProductUseCase.getById(id);
         return ResponseEntity.ok(product);
     }
 }

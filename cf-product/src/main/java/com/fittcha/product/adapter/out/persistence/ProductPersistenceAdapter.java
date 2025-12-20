@@ -1,13 +1,16 @@
 package com.fittcha.product.adapter.out.persistence;
 
+import com.fittcha.product.application.port.out.LoadProductPort;
 import com.fittcha.product.application.port.out.SaveProductPort;
 import com.fittcha.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements SaveProductPort {
+public class ProductPersistenceAdapter implements SaveProductPort, LoadProductPort {
 
     private final ProductJpaRepository productJpaRepository;
     private final ProductMapper productMapper;
@@ -17,6 +20,12 @@ public class ProductPersistenceAdapter implements SaveProductPort {
         ProductJpaEntity entity = productMapper.toJpaEntity(product);
         ProductJpaEntity saveEntity = productJpaRepository.save(entity);
         return productMapper.toDomain(saveEntity);
+    }
+
+    @Override
+    public Optional<Product> findById(Long id) {
+        return productJpaRepository.findById(id)
+                .map(productMapper::toDomain);
     }
 }
 /*

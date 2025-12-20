@@ -59,6 +59,19 @@ public class Product {
                 .build();
     }
 
+    public static Product of(Long id, Long brandId, Long categoryId,
+                             String name, String description, int price, ProductStatus status) {
+        return Product.builder()
+                .id(id)
+                .brandId(brandId)
+                .categoryId(categoryId)
+                .name(name)
+                .description(description)
+                .price(price)
+                .status(status)
+                .build();
+    }
+
     @Builder(access = AccessLevel.PRIVATE)
     private Product(Long id, Long brandId, Long categoryId, String name, String description, int price, ProductStatus status) {
         this.id = id;
