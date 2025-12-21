@@ -5,6 +5,9 @@ import com.fittcha.product.application.port.in.RegisterProductUseCase;
 import com.fittcha.product.domain.Product;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +35,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAll() {
-        List<Product> products = getProductUseCase.getAll();
+    public ResponseEntity<Page<Product>> getAll(@PageableDefault(size = 10) Pageable pageable) {
+        Page<Product> products = getProductUseCase.getAll(pageable);
         return ResponseEntity.ok(products);
     }
 }

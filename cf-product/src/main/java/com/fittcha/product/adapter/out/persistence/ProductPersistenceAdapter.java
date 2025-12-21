@@ -4,10 +4,13 @@ import com.fittcha.product.application.port.out.LoadProductPort;
 import com.fittcha.product.application.port.out.SaveProductPort;
 import com.fittcha.product.domain.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -34,6 +37,17 @@ public class ProductPersistenceAdapter implements SaveProductPort, LoadProductPo
         return productJpaRepository.findAll().stream()
                 .map(productMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        return productJpaRepository.findAll(pageable)
+                .map(productMapper::toDomain);
+        /*
+        왜 .stream() 없어?
+            Page는 이미 .map() 지원함
+            → 내부 요소들 변환하고 Page로 반환
+        */
     }
 }
 /*

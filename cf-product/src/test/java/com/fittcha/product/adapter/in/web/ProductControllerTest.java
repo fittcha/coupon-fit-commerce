@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -39,7 +41,7 @@ public class ProductControllerTest {
     @Test
     @DisplayName("상품을 등록할 수 있다.")
     void registerProduct() throws Exception {
-        //given
+        // given
         RegisterProductRequest request = new RegisterProductRequest();
         //request에 값 세팅이 필요하면 setter나 생성자 추가 필요
 
@@ -48,7 +50,7 @@ public class ProductControllerTest {
         given(registerProductUseCase.register(any(RegisterProductCommand.class)))
                 .willReturn(product);
 
-        //when&then
+        // when & then
         mockMvc.perform(post("/api/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"brandId\":1,\"categoryId\":1,\"name\":\"테스트 상품\",\"description\":\"설명\",\"price\":10000}"))
@@ -72,6 +74,25 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("테스트 상품"));
+    }
+
+    @Test
+    @DisplayName("상품 목록을 조회할 수 있다")
+    void getAllProducts() throws Exception {
+        // given
+        List<Product> products = List.of(
+                Product.of(1L, 1L, 1L, "상품1", "설명1", 10000, ProductStatus.ON_SALE),
+                Product.of(2L, 1L, 2L, "상품2", "설명2", 20000, ProductStatus.ON_SALE)
+        );
+
+        given(getProductUseCase.getAll()).willReturn(products);
+
+        // when & then
+        mockMvc.perform(get("/api/products"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].name").value("상품1"))
+                .andExpect(jsonPath("$[1].name").value("상품2"));
     }
 }
 /*
