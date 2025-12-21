@@ -6,6 +6,7 @@ import com.fittcha.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -26,6 +27,13 @@ public class ProductPersistenceAdapter implements SaveProductPort, LoadProductPo
     public Optional<Product> findById(Long id) {
         return productJpaRepository.findById(id)
                 .map(productMapper::toDomain);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return productJpaRepository.findAll().stream()
+                .map(productMapper::toDomain)
+                .toList();
     }
 }
 /*

@@ -6,6 +6,8 @@ import com.fittcha.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GetProductService implements GetProductUseCase {
@@ -16,5 +18,10 @@ public class GetProductService implements GetProductUseCase {
     public Product getById(Long id) {
         return loadProductPort.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return loadProductPort.findAll();
     }
 }
