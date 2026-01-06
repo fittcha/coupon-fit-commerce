@@ -61,6 +61,15 @@ public class ProductJpaEntity {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
+
+    public void update(Long brandId, Long categoryId, String name, String description, int price) {
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
 /*
 ### Hexagonal에서는 Domain과 Entity를 분리

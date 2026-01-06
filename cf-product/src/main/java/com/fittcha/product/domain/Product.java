@@ -82,4 +82,25 @@ public class Product {
         this.price = price;
         this.status = status;
     }
+
+    public void update(Long brandId, Long categoryId, String name, String description, int price) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("상품명은 필수입니다.");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("가격은 0원 이상이어야 합니다.");
+        }
+        if (brandId == null) {
+            throw new IllegalArgumentException("브랜드 Id는 필수입니다.");
+        }
+        if (categoryId == null) {
+            throw new IllegalArgumentException("카테고리 id는 필수입니다.");
+        }
+
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }
