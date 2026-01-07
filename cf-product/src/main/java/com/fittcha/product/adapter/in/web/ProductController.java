@@ -1,9 +1,6 @@
 package com.fittcha.product.adapter.in.web;
 
-import com.fittcha.product.application.port.in.DeleteProductUseCase;
-import com.fittcha.product.application.port.in.GetProductUseCase;
-import com.fittcha.product.application.port.in.RegisterProductUseCase;
-import com.fittcha.product.application.port.in.UpdateProductUseCase;
+import com.fittcha.product.application.port.in.*;
 import com.fittcha.product.domain.Product;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +36,19 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> getAll(@PageableDefault(size = 10) Pageable pageable) {
-        Page<Product> products = getProductUseCase.getAll(pageable);
+    public ResponseEntity<Page<Product>> getAll(
+                                                @RequestParam(required = false) String name,
+                                                @RequestParam(required = false) Long brandId,
+                                                @RequestParam(required = false) Long categoryId,
+                                                @PageableDefault(size = 10) Pageable pageable) {
+
+        ProductSearchCondition condition = ProductSearchCondition.builder()
+                .name(name)
+                .brandId(brandId)
+                .categoryId(categoryId)
+                .build();
+
+        Page<Product> products = getProductUseCase.search(condition, pageable);
         return ResponseEntity.ok(products);
     }
 

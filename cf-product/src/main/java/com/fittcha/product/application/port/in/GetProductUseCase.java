@@ -13,4 +13,6 @@ public interface GetProductUseCase {
     List<Product> getAll();
 
     Page<Product> getAll(Pageable pageable);
+
+    Page<Product> search(ProductSearchCondition condition, Pageable pageable);
 }

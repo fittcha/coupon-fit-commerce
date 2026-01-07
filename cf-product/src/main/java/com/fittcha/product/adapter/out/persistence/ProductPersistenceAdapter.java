@@ -1,5 +1,6 @@
 package com.fittcha.product.adapter.out.persistence;
 
+import com.fittcha.product.application.port.in.ProductSearchCondition;
 import com.fittcha.product.application.port.out.DeleteProductPort;
 import com.fittcha.product.application.port.out.LoadProductPort;
 import com.fittcha.product.application.port.out.SaveProductPort;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
 public class ProductPersistenceAdapter implements SaveProductPort, LoadProductPort, UpdateProductPort, DeleteProductPort {
 
     private final ProductJpaRepository productJpaRepository;
+    private final ProductQueryRepository productQueryRepository;
     private final ProductMapper productMapper;
 
     @Override
@@ -50,6 +51,12 @@ public class ProductPersistenceAdapter implements SaveProductPort, LoadProductPo
             Page는 이미 .map() 지원함
             → 내부 요소들 변환하고 Page로 반환
         */
+    }
+
+    @Override
+    public Page<Product> search(ProductSearchCondition condition, Pageable pageable) {
+        return productQueryRepository.search(condition, pageable)
+                .map(productMapper::toDomain);
     }
 
     @Override

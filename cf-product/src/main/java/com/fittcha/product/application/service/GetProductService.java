@@ -1,6 +1,7 @@
 package com.fittcha.product.application.service;
 
 import com.fittcha.product.application.port.in.GetProductUseCase;
+import com.fittcha.product.application.port.in.ProductSearchCondition;
 import com.fittcha.product.application.port.out.LoadProductPort;
 import com.fittcha.product.domain.Product;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,10 @@ public class GetProductService implements GetProductUseCase {
     @Override
     public Page<Product> getAll(Pageable pageable) {
         return loadProductPort.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> search(ProductSearchCondition condition, Pageable pageable) {
+        return loadProductPort.search(condition, pageable);
     }
 }

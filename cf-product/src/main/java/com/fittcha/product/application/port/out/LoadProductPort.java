@@ -1,5 +1,6 @@
 package com.fittcha.product.application.port.out;
 
+import com.fittcha.product.application.port.in.ProductSearchCondition;
 import com.fittcha.product.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +15,6 @@ public interface LoadProductPort {
     List<Product> findAll();
 
     Page<Product> findAll(Pageable pageable);
+
+    Page<Product> search(ProductSearchCondition condition, Pageable pageable);
 }

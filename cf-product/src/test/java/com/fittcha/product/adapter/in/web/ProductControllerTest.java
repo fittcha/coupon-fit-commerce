@@ -94,7 +94,8 @@ public class ProductControllerTest {
 
         Page<Product> productPage = new PageImpl<>(products);
 
-        given(getProductUseCase.getAll(any(Pageable.class))).willReturn(productPage);
+        given(getProductUseCase.search(any(ProductSearchCondition.class), any(Pageable.class)))
+                .willReturn(productPage);
 
         // when & then
         mockMvc.perform(get("/api/products"))
@@ -136,6 +137,70 @@ public class ProductControllerTest {
         // when & then
         mockMvc.perform(delete("/api/products/1"))
                 .andExpect(status().isNoContent());
+    }
+
+    @Test
+    @DisplayName("상품을 이름으로 검색할 수 있다")
+    void searchProductsByName() throws Exception {
+        // given
+        List<Product> products = List.of(
+                Product.of(1L, 1L, 1L, "테스트 상품", "설명", 10000, com.fittcha.product.domain.ProductStatus.ON_SALE)
+        );
+
+        Page<Product> productPage = new PageImpl<>(products);
+
+        given(getProductUseCase.search(any(ProductSearchCondition.class), any(Pageable.class)))
+                .willReturn(productPage);
+
+        // when & then
+        mockMvc.perform(get("/api/products")
+                        .param("name", "테스트"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].name").value("테스트 상품"));
+    }
+
+    @Test
+    @DisplayName("상품을 브랜드ID로 검색할 수 있다")
+    void searchProductsByBrandId() throws Exception {
+        // given
+        List<Product> products = List.of(
+                Product.of(1L, 1L, 1L, "상품1", "설명", 10000, com.fittcha.product.domain.ProductStatus.ON_SALE),
+                Product.of(2L, 1L, 2L, "상품2", "설명", 20000, com.fittcha.product.domain.ProductStatus.ON_SALE)
+        );
+
+        Page<Product> productPage = new PageImpl<>(products);
+
+        given(getProductUseCase.search(any(ProductSearchCondition.class), any(Pageable.class)))
+                .willReturn(productPage);
+
+        // when & then
+        mockMvc.perform(get("/api/products")
+                        .param("brandId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(2));
+    }
+
+    @Test
+    @DisplayName("상품을 복합 조건으로 검색할 수 있다")
+    void searchProductsByMultipleConditions() throws Exception {
+        // given
+        List<Product> products = List.of(
+                Product.of(1L, 1L, 1L, "테스트 상품", "설명", 10000, com.fittcha.product.domain.ProductStatus.ON_SALE)
+        );
+
+        Page<Product> productPage = new PageImpl<>(products);
+
+        given(getProductUseCase.search(any(ProductSearchCondition.class), any(Pageable.class)))
+                .willReturn(productPage);
+
+        // when & then
+        mockMvc.perform(get("/api/products")
+                        .param("name", "테스트")
+                        .param("brandId", "1")
+                        .param("categoryId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(1));
     }
 }
 /*
