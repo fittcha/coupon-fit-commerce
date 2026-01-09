@@ -335,7 +335,7 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 #### Base URL
 ```
-/api/v1
+/api
 ```
 
 #### 응답 형식
@@ -381,11 +381,11 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `POST` | `/api/v1/products` | 상품 등록 | 관리자 |
-| `GET` | `/api/v1/products/{id}` | 상품 상세 조회 | - |
-| `GET` | `/api/v1/products` | 상품 목록/검색 | - |
-| `PUT` | `/api/v1/products/{id}` | 상품 수정 | 관리자 |
-| `DELETE` | `/api/v1/products/{id}` | 상품 삭제 | 관리자 |
+| `POST` | `/api/products` | 상품 등록 | 관리자 |
+| `GET` | `/api/products/{id}` | 상품 상세 조회 | - |
+| `GET` | `/api/products` | 상품 목록/검색 | - |
+| `PUT` | `/api/products/{id}` | 상품 수정 | 관리자 |
+| `DELETE` | `/api/products/{id}` | 상품 삭제 | 관리자 |
 
 #### 상품 검색 쿼리 파라미터
 
@@ -407,17 +407,17 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `POST` | `/api/v1/auth/login/kakao` | 카카오 로그인 | - |
-| `POST` | `/api/v1/auth/login/naver` | 네이버 로그인 | - |
-| `POST` | `/api/v1/auth/login/google` | 구글 로그인 | - |
-| `POST` | `/api/v1/auth/logout` | 로그아웃 | 회원 |
-| `GET` | `/api/v1/members/me` | 내 정보 조회 | 회원 |
-| `PUT` | `/api/v1/members/me` | 내 정보 수정 | 회원 |
-| `GET` | `/api/v1/members/me/grade` | 내 등급 조회 | 회원 |
-| `GET` | `/api/v1/members/me/addresses` | 배송지 목록 | 회원 |
-| `POST` | `/api/v1/members/me/addresses` | 배송지 추가 | 회원 |
-| `PUT` | `/api/v1/members/me/addresses/{id}` | 배송지 수정 | 회원 |
-| `DELETE` | `/api/v1/members/me/addresses/{id}` | 배송지 삭제 | 회원 |
+| `POST` | `/api/auth/login/kakao` | 카카오 로그인 | - |
+| `POST` | `/api/auth/login/naver` | 네이버 로그인 | - |
+| `POST` | `/api/auth/login/google` | 구글 로그인 | - |
+| `POST` | `/api/auth/logout` | 로그아웃 | 회원 |
+| `GET` | `/api/members/me` | 내 정보 조회 | 회원 |
+| `PUT` | `/api/members/me` | 내 정보 수정 | 회원 |
+| `GET` | `/api/members/me/grade` | 내 등급 조회 | 회원 |
+| `GET` | `/api/members/me/addresses` | 배송지 목록 | 회원 |
+| `POST` | `/api/members/me/addresses` | 배송지 추가 | 회원 |
+| `PUT` | `/api/members/me/addresses/{id}` | 배송지 수정 | 회원 |
+| `DELETE` | `/api/members/me/addresses/{id}` | 배송지 삭제 | 회원 |
 
 ---
 
@@ -425,14 +425,14 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `POST` | `/api/v1/coupons` | 쿠폰 생성 | 관리자 |
-| `GET` | `/api/v1/coupons` | 쿠폰 목록 | 관리자 |
-| `GET` | `/api/v1/coupons/{id}` | 쿠폰 상세 | 관리자 |
-| `PUT` | `/api/v1/coupons/{id}` | 쿠폰 수정 | 관리자 |
-| `DELETE` | `/api/v1/coupons/{id}` | 쿠폰 삭제 | 관리자 |
-| `POST` | `/api/v1/coupons/{id}/issue` | 쿠폰 다운로드 (발급) | 회원 |
-| `GET` | `/api/v1/members/me/coupons` | 내 쿠폰 목록 | 회원 |
-| `GET` | `/api/v1/members/me/coupons/available` | 사용 가능 쿠폰 | 회원 |
+| `POST` | `/api/coupons` | 쿠폰 생성 | 관리자 |
+| `GET` | `/api/coupons` | 쿠폰 목록 | 관리자 |
+| `GET` | `/api/coupons/{id}` | 쿠폰 상세 | 관리자 |
+| `PUT` | `/api/coupons/{id}` | 쿠폰 수정 | 관리자 |
+| `DELETE` | `/api/coupons/{id}` | 쿠폰 삭제 | 관리자 |
+| `POST` | `/api/coupons/{id}/issue` | 쿠폰 다운로드 (발급) | 회원 |
+| `GET` | `/api/members/me/coupons` | 내 쿠폰 목록 | 회원 |
+| `GET` | `/api/members/me/coupons/available` | 사용 가능 쿠폰 | 회원 |
 
 ---
 
@@ -440,13 +440,13 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `GET` | `/api/v1/cart` | 장바구니 조회 | 회원 |
-| `POST` | `/api/v1/cart/items` | 장바구니 담기 | 회원 |
-| `PUT` | `/api/v1/cart/items/{id}` | 수량 변경 | 회원 |
-| `DELETE` | `/api/v1/cart/items/{id}` | 장바구니 삭제 | 회원 |
-| `DELETE` | `/api/v1/cart/items` | 장바구니 전체 삭제 | 회원 |
-| `GET` | `/api/v1/cart/coupons` | 적용 가능 쿠폰 목록 | 회원 |
-| `POST` | `/api/v1/cart/coupons/optimize` | 쿠폰 최적 조합 추천 | 회원 |
+| `GET` | `/api/cart` | 장바구니 조회 | 회원 |
+| `POST` | `/api/cart/items` | 장바구니 담기 | 회원 |
+| `PUT` | `/api/cart/items/{id}` | 수량 변경 | 회원 |
+| `DELETE` | `/api/cart/items/{id}` | 장바구니 삭제 | 회원 |
+| `DELETE` | `/api/cart/items` | 장바구니 전체 삭제 | 회원 |
+| `GET` | `/api/cart/coupons` | 적용 가능 쿠폰 목록 | 회원 |
+| `POST` | `/api/cart/coupons/optimize` | 쿠폰 최적 조합 추천 | 회원 |
 
 #### 장바구니 담기 Request
 
@@ -487,12 +487,12 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `POST` | `/api/v1/orders` | 주문 생성 | 회원 |
-| `GET` | `/api/v1/orders` | 주문 목록 | 회원 |
-| `GET` | `/api/v1/orders/{id}` | 주문 상세 | 회원 |
-| `POST` | `/api/v1/orders/{id}/payment` | 결제 요청 | 회원 |
-| `POST` | `/api/v1/orders/{id}/payment/confirm` | 결제 승인 | 회원 |
-| `POST` | `/api/v1/orders/{id}/cancel` | 주문 취소 | 회원 |
+| `POST` | `/api/orders` | 주문 생성 | 회원 |
+| `GET` | `/api/orders` | 주문 목록 | 회원 |
+| `GET` | `/api/orders/{id}` | 주문 상세 | 회원 |
+| `POST` | `/api/orders/{id}/payment` | 결제 요청 | 회원 |
+| `POST` | `/api/orders/{id}/payment/confirm` | 결제 승인 | 회원 |
+| `POST` | `/api/orders/{id}/cancel` | 주문 취소 | 회원 |
 
 #### 주문 생성 Request
 
@@ -514,10 +514,10 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `POST` | `/api/v1/claims/cancel` | 주문 전체 취소 | 회원 |
-| `POST` | `/api/v1/claims/partial-cancel` | 부분 취소 | 회원 |
-| `GET` | `/api/v1/claims` | 클레임 목록 | 회원 |
-| `GET` | `/api/v1/claims/{id}` | 클레임 상세 | 회원 |
+| `POST` | `/api/claims/cancel` | 주문 전체 취소 | 회원 |
+| `POST` | `/api/claims/partial-cancel` | 부분 취소 | 회원 |
+| `GET` | `/api/claims` | 클레임 목록 | 회원 |
+| `GET` | `/api/claims/{id}` | 클레임 상세 | 회원 |
 
 #### 부분 취소 Request
 
@@ -537,11 +537,11 @@ PENDING → PAID → PREPARING → SHIPPING → DELIVERED
 
 | Method | Endpoint | 설명 | 인증 |
 |--------|----------|------|------|
-| `GET` | `/api/v1/admin/members` | 회원 목록 | 관리자 |
-| `GET` | `/api/v1/admin/orders` | 전체 주문 목록 | 관리자 |
-| `PUT` | `/api/v1/admin/orders/{id}/status` | 주문 상태 변경 | 관리자 |
-| `GET` | `/api/v1/admin/claims` | 전체 클레임 목록 | 관리자 |
-| `PUT` | `/api/v1/admin/claims/{id}/approve` | 클레임 승인 | 관리자 |
+| `GET` | `/api/admin/members` | 회원 목록 | 관리자 |
+| `GET` | `/api/admin/orders` | 전체 주문 목록 | 관리자 |
+| `PUT` | `/api/admin/orders/{id}/status` | 주문 상태 변경 | 관리자 |
+| `GET` | `/api/admin/claims` | 전체 클레임 목록 | 관리자 |
+| `PUT` | `/api/admin/claims/{id}/approve` | 클레임 승인 | 관리자 |
 
 ---
 
